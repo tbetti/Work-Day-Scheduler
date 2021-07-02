@@ -14,7 +14,7 @@ textarea {
 }
 
 .jumbotron {
-  text-align: center;
+  text-align: center; /* not showing up in browser */
   background-color: transparent;
   color: black;
   border-radius: 0;
