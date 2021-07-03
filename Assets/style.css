@@ -11,10 +11,14 @@ textarea {
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+
+  /* I added the next parts */
+  width: 100%;;
+  height:100%;
 }
 
 .jumbotron {
-  text-align: center; /* not showing up in browser */
+  text-align: center;
   background-color: transparent;
   color: black;
   border-radius: 0;
@@ -34,6 +38,11 @@ textarea {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;
+}
+
+/* I added the next class */
+.column{
+  padding: 0px;
 }
 
 .hour {
