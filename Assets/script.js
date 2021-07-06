@@ -98,8 +98,28 @@ save.on("click", function(event){
     userInput[5].task = task14.value;
     userInput[6].task = task15.value;
     userInput[7].task = task16.value;
-    console.log(userInput);
 
     // commits user input into the local storage
     localStorage.setItem("Tasks", JSON.stringify(userInput));
 })
+
+var clearAll = $("#clear");
+clearAll.on("click", function(event){
+    //event.preventDefault();
+    for(i=0; i < userInput.length; i++){
+        userInput[i].task = ""; 
+    }
+    console.log(userInput);
+
+    localStorage.setItem("Tasks", JSON.stringify(userInput));
+
+    // fill textArea with blank tasks
+    task9.value = "";
+    task10.value = "";
+    task11.value = "";
+    task12.value = "";
+    task13.value = "";
+    task14.value = "";
+    task15.value = "";
+    task16.value = "";
+});

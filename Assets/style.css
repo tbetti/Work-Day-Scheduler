@@ -23,6 +23,8 @@ textarea {
   color: black;
   border-radius: 0;
   border-bottom: 10px solid black;
+  /* I added this part */
+  padding: 1%;
 }
 
 .description {
@@ -78,5 +80,23 @@ textarea {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
   /* I added */
+  cursor: pointer;
+}
+
+/* I need to figure out a way to center the button */
+footer{ 
+  display: flex;
+  align-items: center;
+  padding: 2%;
+}
+
+button{
+  background-color: #06aed5;
+  color: white;
+  font-size: 24px;
+  padding: 1%;
+}
+
+button:hover{
   cursor: pointer;
 }
