@@ -4,38 +4,32 @@ var TOTAL_WORKDAY = 8;
 var currentHour = moment().format("H");
 var userInput = JSON.parse(localStorage.getItem("Tasks")) || [
     {
-        hour: START_HOUR,
         task: ""
     },
     {
-        hour: START_HOUR + 1,
         task: ""
     },
     {
-        hour: START_HOUR + 2,
         task: ""
     },
     {
-        hour: START_HOUR + 3,
         task: ""
     },
     {
-        hour: START_HOUR + 4,
         task: ""
     },    {
-        hour: START_HOUR + 5,
         task: ""
     },    {
-        hour: START_HOUR + 6,
         task: ""
     },    {
-        hour: START_HOUR + 7,
         task: ""
     },    {
-        hour: START_HOUR + TOTAL_WORKDAY,
         task: ""
     }
 ];
+
+// Refresh every 15 minutes
+setInterval(changeColor, 900000);
 
 // Display current date
 var currentDate = moment().format("dddd, MMMM Do");
@@ -46,13 +40,14 @@ var container = $(".container");
 for(i=START_HOUR; i < TOTAL_WORKDAY+START_HOUR; i++){
     var row = $("<div>").attr("class", "row time-block");
     var hour = $("<div>").attr("class", "col-1 column hour");
+    var hourDisplay = $("<h7>");
     var inputColumn = $("<div>").attr("class", "col-10 column");
     var saveBtn = $("<div>").attr("class", "col-1 column saveBtn");
     var textArea = $("<textarea>");
     var iBtn = $("<i>");
 
     container.append(row);
-    row.append(hour);
+    row.append(hour.append(hourDisplay));
     row.append(inputColumn);
     textArea.attr("id", "task"+i);
     inputColumn.append(textArea);
@@ -66,16 +61,20 @@ for(i=START_HOUR; i < TOTAL_WORKDAY+START_HOUR; i++){
     // display time
     if (i<12)
     {
-        hour.text(i + " AM");
+        hourDisplay.text(i + " AM");
     } else if (i===12){
-        hour.text(i + " PM");
+        hourDisplay.text(i + " PM");
     }
     else {
         var twelveHour = i - 12;
-        hour.text(twelveHour + " PM");
+        hourDisplay.text(twelveHour + " PM");
     }
 
-    // change row colors based on current time
+    changeColor();
+}
+
+// change row colors based on current time
+function changeColor(){
     if(currentHour==i){
         inputColumn.addClass("present");
     } else if (currentHour>i){
@@ -85,10 +84,9 @@ for(i=START_HOUR; i < TOTAL_WORKDAY+START_HOUR; i++){
     }
 }
 
+// Save user input when save button clicked
 var save = $("i");
-save.on("click", function(event){
-    //event.preventDefault();
-
+save.on("click", function(){
     // commits what user inputs into the userInput object - is there a way to for-loop this?
     userInput[0].task = task9.value; 
     userInput[1].task = task10.value;
@@ -103,14 +101,13 @@ save.on("click", function(event){
     localStorage.setItem("Tasks", JSON.stringify(userInput));
 })
 
+// Clear userInput when clear button is clicked
 var clearAll = $("#clear");
-clearAll.on("click", function(event){
-    //event.preventDefault();
+clearAll.on("click", function(){
     for(i=0; i < userInput.length; i++){
         userInput[i].task = ""; 
     }
-    console.log(userInput);
-
+    
     localStorage.setItem("Tasks", JSON.stringify(userInput));
 
     // fill textArea with blank tasks
